@@ -15,5 +15,6 @@ Enter Password
 Click Login
     Click Element With Condition    ${login_button}
 
-Is On Products Page
+Is On Page
+    [Arguments]    ${page}
     Verify Element Is Visible    ${title}

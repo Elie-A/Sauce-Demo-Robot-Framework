@@ -1,7 +1,7 @@
 *** Settings ***
 Library     SeleniumLibrary
-Resource    ../utils/Keywords.robot
-Resource    ../utils/LoginKeywords.robot
+Resource    ../../utils/Keywords.robot
+Resource    ../../utils/LoginKeywords.robot
 
 *** Variables ***
 ${browser}    chrome
@@ -15,4 +15,4 @@ Login Test
     Enter Username    ${username}
     Enter Password    ${password}
     Click Login
-    Is On Products Page    
+    Is On Page    "Products"    
