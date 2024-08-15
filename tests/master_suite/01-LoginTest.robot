@@ -1,5 +1,4 @@
 *** Settings ***
-Library     SeleniumLibrary
 Resource    ../../utils/Keywords.robot
 Resource    ../../utils/LoginKeywords.robot
 

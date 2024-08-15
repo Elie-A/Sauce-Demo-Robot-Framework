@@ -3,12 +3,11 @@ Library      SeleniumLibrary
 Library      Collections
 Resource     Keywords.robot
 Variables    ../pageObjects/ProductsPageLocators.py
+Variables    ../utils/python/sharedVariables.py
 
 *** Variables ***
 ${elements}
 ${genericLocator}=     //button[contains(text(),'{}')]
-@{listOfProductInCart}=  []
-@{listOfPricesInCart}=  []  
 ${total_count}
 
 *** Keywords ***
@@ -38,7 +37,7 @@ Validate Selected Sort
         Log    "Invalid sort type: ${sortType}"
     END
 Add Or Remove Items From Cart
-    [Arguments]    ${total}    ${text}
+    [Arguments]    ${total}    ${text}    ${currency}=${None}
     ${total_count}=    Set Variable    ${total}
     ${locator}=    Return XPath Locator    ${genericLocator}    ${text}
     ${list}=    Get WebElements    ${locator}
@@ -46,21 +45,21 @@ Add Or Remove Items From Cart
     ${elements_prices}=   Get WebElements    ${itemPricesList}
     FOR    ${i}    IN RANGE    0    ${total}
         ${button_text}=    Get Text    ${list}[${i}]
-        ${res}=    Run Keyword And Return Status    String contains    ${button_text}    Add 
+        ${res}=    String contains    ${button_text}    Add 
         IF    ${res}
             Click Element    ${list}[${i}]
             ${name}=    Get Text    ${elements_names}[${i}]
             Append To List    ${listOfProductInCart}    ${name}
             ${price}=    Get Text    ${elements_prices}[${i}]
-            ${price_new}=    Replace Pattern In String    ${price}    $
+            ${price_new}=    Replace Pattern In String    ${price}    ${currency}
             Append To List    ${listOfPricesInCart}    ${price_new}
         ELSE
             Click Element    ${list}[${i}]
             ${name}=    Get Text    ${elements_names}[${i}]
             ${price}=    Get Text    ${elements_prices}[${i}]
             ${price_new}=    Replace Pattern In String    ${price}    $
-            Remove From List    ${listOfProductInCart}    ${name}
-            Remove From List    ${listOfPricesInCart}    ${price_new}
+            Remove From List By Value    ${listOfProductInCart}    ${name}
+            Remove From List By Value    ${listOfPricesInCart}    ${price_new}
         END
     END
 

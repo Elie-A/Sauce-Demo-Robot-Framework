@@ -1,0 +1,5 @@
+title = "class:title"
+first_name = "id:first-name"
+last_name = "id:last-name"
+postal_code = "id:postal-code"
+continue_btn =  "id:continue" 

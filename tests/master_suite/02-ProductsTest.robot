@@ -1,5 +1,4 @@
 *** Settings ***
-Library     SeleniumLibrary
 Resource    ../../utils/Keywords.robot
 Resource    ../../utils/ProductsKeywords.robot
 
@@ -13,14 +12,14 @@ Sort Items And Validate
 
 Add Items To Shopping Cart
     Is On Page    "Products"
-    Add Or Remove Items From Cart    4    Add
+    Add Or Remove Items From Cart    4    Add    $
     Validate Count In Cart    ${shoppingCartBadge}    4
 
-Remove Items To Shopping Cart
+Remove Items From Shopping Cart
     Is On Page    "Products"
     Add Or Remove Items From Cart    1    Remove
     Validate Count In Cart    ${shoppingCartBadge}    3
 
 Click On Shopping Cart
     Go To Shopping Cart    ${shoppingCartLink}
-    
+    Is On Page    "Your Cart"

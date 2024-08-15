@@ -1,4 +1,6 @@
+from typing import List
 from robot.api.deco import keyword
+from robot.libraries.BuiltIn import BuiltIn
 
 @keyword("Is List Of Strings Sorted")
 def is_list_of_strings_sorted(list_of_elements: 'list[str]', order: str) -> bool:
@@ -47,3 +49,9 @@ def retun_xpath_locator(generic_locator: str, text: str):
 @keyword("Replace Pattern In String")
 def replace_pattern_in_string(original_string: str, pattern: str):
     return  original_string.replace(pattern, "")
+
+@keyword("Remove From List By Value")
+def remove_from_list_by_value(list_of_elements: List[object], value: object):
+    while value in list_of_elements:
+        list_of_elements.remove(value)
+    return list_of_elements
